@@ -1,0 +1,28 @@
+.main-content {
+    background-color: rgb(255, 255, 252);
+    width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+  }
+  
+  .add-task input {
+    margin-right: 10px;
+  }
+  
+  .add-task button {
+    padding: 5px 10px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 10px;
+  }
+  
+  li button {
+    margin-left: 5px;
+  }
+  

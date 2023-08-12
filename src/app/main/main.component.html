@@ -1,0 +1,56 @@
+<div class="main-content d-flex flex-column align-items-center">
+  <h4 style="color: rgb(65, 65, 243);">To-Do List</h4>
+  <div class="add-task">
+    <div class="row align-items-center">
+      <div class="col">
+        <input type="text" class="form-control" [(ngModel)]="newTask" placeholder="Enter task">
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-primary" (click)="addTask()">Add Task</button>
+      </div>
+    </div>
+  </div>
+  <div class="task-list" [ngClass]="{'skyblue-background': tasks.length > 0}">
+  <ul>
+    <li *ngFor="let task of pagedTasks; let i = index">
+      <div class="row align-items-center mt-3">
+        <div class="col">
+          <ng-container *ngIf="!isTaskBeingEdited(i + (currentPage - 1) * itemsPerPage)">
+            {{ task }}
+          </ng-container>
+          <ng-container *ngIf="isTaskBeingEdited(i + (currentPage - 1) * itemsPerPage)">
+            <input type="text" class="form-control" [(ngModel)]="editedTask" placeholder="Edit task">
+          </ng-container>
+        </div>
+        <div class="col-auto">
+          <ng-container *ngIf="!isTaskBeingEdited(i + (currentPage - 1) * itemsPerPage)">
+            <div class="button-group">
+              <button class="btn btn-secondary mr-2" (click)="editTask(i + (currentPage - 1) * itemsPerPage)">Edit</button>
+              <button class="btn btn-danger" (click)="deleteTask(i + (currentPage - 1) * itemsPerPage)">Delete</button>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="isTaskBeingEdited(i + (currentPage - 1) * itemsPerPage)">
+            <div class="button-group">
+              <button class="btn btn-success mr-2" (click)="saveTask(i + (currentPage - 1) * itemsPerPage)">Save</button>
+              <button class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </li>
+  </ul>
+  </div>
+  <div class="pagination mt-3">
+    <button class="btn btn-primary" [disabled]="currentPage === 1" (click)="prevPage()">Prev</button>
+    <span>{{ currentPage }} / {{ totalPages }}</span>
+    <button class="btn btn-primary" [disabled]="currentPage === totalPages" (click)="nextPage()">Next</button>
+  </div>
+</div>
+<style>
+  .skyblue-background {
+  background-color: rgb(249, 251, 252);
+  padding:7px;
+  margin-top:5px;
+}
+
+</style>
